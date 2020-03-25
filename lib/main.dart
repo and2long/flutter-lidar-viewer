@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:math' as Math;
+
 import 'package:flutter/material.dart';
 import 'package:livox/lidar_data_model.dart';
 import 'package:livox/lidar_scanner_widget.dart';
@@ -70,11 +70,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             Container(
               margin: EdgeInsets.all(20),
               child: Text(
-                  '位置：${double.parse(_data.horizontalAngle) * Math.pi ~/ 180}'),
+                  '位置：${double.parse(_data.horizontalAngle) == 0 ? '正' : double.parse(_data.horizontalAngle) > 0 ? '右' : '左'}前方${double.parse(_data.horizontalAngle).toInt()}º'),
             ),
             Container(
               margin: EdgeInsets.only(left: 20),
-              child: Text('距离：${double.parse(_data.radius).toInt()}mm'),
+              child: Text(
+                  '距离：${(double.parse(_data.radius) / 1000).toStringAsFixed(3)}m'),
             ),
           ]),
       floatingActionButton: FloatingActionButton(

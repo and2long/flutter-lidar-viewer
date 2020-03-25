@@ -70,12 +70,12 @@ class LidarPainter extends CustomPainter {
     if (double.parse(data.radius) != 0) {
       double radius = double.parse(data.radius);
       // double elevationAngle = double.parse(data.elevationAngle);
-      double angle = double.parse(data.horizontalAngle) * Math.pi / 180;
-      double x = Math.cos(angle) * radius / scale;
-      double y = Math.sin(angle) * radius / scale;
+      double radians = double.parse(data.horizontalAngle) * Math.pi / 180;
+      double x = Math.sin(radians) * radius / scale;
+      double y = Math.cos(radians) * radius / scale;
       Offset tOffset = Offset(
         offsetCenter.dx + x,
-        offsetCenter.dy + y,
+        offsetCenter.dy - y,
       );
       canvas.drawPoints(PointMode.points, [tOffset], _targetPaint);
     }
